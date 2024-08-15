@@ -114,6 +114,48 @@ class LinkedList {
     str += `null`;
     return str;
   }
+
+  insertAt(value, index) {
+    if (index < 0 || index > this.getSize()) return;
+
+    let node = 0;
+    let currentNode = this.getHead();
+    let prevNode;
+    const newNode = new Node(value);
+
+    if (index === 0) {
+      this.prepend(value);
+      return;
+    }
+    while (currentNode !== null && node < index) {
+      prevNode = currentNode;
+      currentNode = currentNode.next;
+      node++;
+    }
+    prevNode.next = newNode;
+    newNode.next = currentNode;
+  }
+
+  removeAt(index) {
+    if (index < 0 || index >= this.getSize()) return;
+
+    let currentNode = this.getHead();
+
+    if (index === 0) {
+      this.head = currentNode.next;
+      return;
+    }
+
+    let prevNode;
+    let node = 0;
+
+    while (currentNode !== null && node < index) {
+      prevNode = currentNode;
+      currentNode = currentNode.next;
+      node++;
+    }
+    prevNode.next = currentNode.next;
+  }
 }
 
 class Node {
