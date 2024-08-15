@@ -66,6 +66,54 @@ class LinkedList {
     }
     return currentNode;
   }
+
+  popNode() {
+    if (this.size() == 1) {
+      this.head = null;
+      return;
+    }
+    let tailNode = this.getTail();
+    let currentNode = this.getHead();
+    while (currentNode.next !== tailNode) {
+      currentNode = currentNode.next;
+    }
+    currentNode.next = tailNode.next;
+  }
+
+  contains(value) {
+    let currentNode = this.getHead();
+    while (currentNode !== null) {
+      if (currentNode.value == value) {
+        return true;
+      }
+      currentNode = currentNode.next;
+    }
+    return false;
+  }
+
+  find(value) {
+    let index = 0;
+    let currentNode = this.getHead();
+    while (currentNode !== null) {
+      if (currentNode.value == value) {
+        return index;
+      }
+      index++;
+      currentNode = currentNode.next;
+    }
+    return null;
+  }
+
+  toString() {
+    let currentNode = this.getHead();
+    let str = "";
+    while (currentNode !== null) {
+      str += `(${currentNode.value}) -> `;
+      currentNode = currentNode.next;
+    }
+    str += `null`;
+    return str;
+  }
 }
 
 class Node {
